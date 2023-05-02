@@ -3,10 +3,10 @@ package com.bridgelabz;
 import java.util.ArrayList;
 import java.util.List;
 
-public class HashTable<K,V> {
+public class HashTable<K, V> {
     int bucketSize;
 
-    List<LinkedList<K,V>> bucketArray = new ArrayList<>(bucketSize);
+    List<LinkedList<K, V>> bucketArray = new ArrayList<>(bucketSize);
 
     public HashTable() {
 
@@ -26,14 +26,14 @@ public class HashTable<K,V> {
 
     public void addOrUpdate(K key, V value) {
         int index = getIndex(key);
-        LinkedList<K,V> linkedList = bucketArray.get(index);
+        LinkedList<K, V> linkedList = bucketArray.get(index);
         if (linkedList == null) {
             linkedList = new LinkedList<>();
             bucketArray.add(index, linkedList);
             linkedList.add(key, value);
         } else {
             Node<K, V> currentNode = linkedList.search(key);
-            if(currentNode != null)
+            if (currentNode != null)
                 currentNode.value = value;
             else
                 linkedList.add(key, value);
@@ -49,10 +49,18 @@ public class HashTable<K,V> {
         return currentNode != null ? currentNode.value : null;
     }
 
+    public void searchAndRemove(K searchData, V value) {
+        int index = getIndex(searchData);
+        LinkedList<K, V> linkedList = bucketArray.get(index);
+        linkedList.searchAndRemove(searchData);
+    }
+
     @Override
     public String toString() {
         return "HashTable{" +
                 "bucketArray=" + bucketArray +
                 '}';
     }
+
+
 }

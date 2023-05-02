@@ -1,6 +1,6 @@
 package com.bridgelabz;
 
-public class LinkedList<K,V> {
+public class LinkedList<K, V> {
     Node<K, V> head;
     Node<K, V> tail;
 
@@ -24,6 +24,15 @@ public class LinkedList<K,V> {
         }
         return null;
     }
+
+    public void searchAndRemove(K searchData) {
+        Node<K, V> searchedNode = search(searchData);
+        if (searchedNode != null) {
+            searchedNode.key = null;
+            searchedNode.value = null;
+        }
+    }
+
 
     @Override
     public String toString() {
